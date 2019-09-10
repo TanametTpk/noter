@@ -1,4 +1,6 @@
-package th.ku.noter;
+package th.ku.noter.source;
+
+import th.ku.noter.databases.SqliteConnector;
 
 public class DatabaseSource {
 

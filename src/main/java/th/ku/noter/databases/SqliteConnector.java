@@ -1,4 +1,6 @@
-package th.ku.noter;
+package th.ku.noter.databases;
+
+import th.ku.noter.source.Dao;
 
 import java.sql.*;
 import java.util.List;
