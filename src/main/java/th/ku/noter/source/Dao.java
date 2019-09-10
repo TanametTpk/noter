@@ -1,4 +1,4 @@
-package th.ku.noter;
+package th.ku.noter.source;
 
 import java.sql.PreparedStatement;
 

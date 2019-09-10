@@ -1,4 +1,6 @@
-package th.ku.noter;
+package th.ku.noter.databases;
+
+import th.ku.noter.source.Dao;
 
 import java.sql.*;
 import java.util.List;
@@ -6,11 +8,18 @@ import java.util.List;
 public class SqliteConnector {
 
     private String url;
+    private Connection c;
+    private static SqliteConnector sqlite = new SqliteConnector();
 
-    public SqliteConnector(String db){
+    public SqliteConnector(){
 
-        this.url = "jdbc:sqlite:" + db + ".sqlite";
+        this.url = "jdbc:sqlite:noter.db";
+        this.c = connect();
 
+    }
+
+    public static SqliteConnector getInstance(){
+        return sqlite;
     }
 
     private Connection connect(){
@@ -30,7 +39,7 @@ public class SqliteConnector {
 
     public ResultSet execute(String query){
 
-        try(Connection c = this.connect()){
+        try{
 
             Statement stmt = c.createStatement();
             ResultSet re = stmt.executeQuery(query);
@@ -46,7 +55,7 @@ public class SqliteConnector {
 
     public void update(String query , List<Dao> dummies){
 
-        try(Connection c = this.connect(); PreparedStatement prep = c.prepareStatement(query) ){
+        try(PreparedStatement prep = c.prepareStatement(query) ){
 
             for (Dao dummy : dummies) {
                 dummy.update(prep);
