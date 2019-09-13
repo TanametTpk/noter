@@ -1,6 +1,8 @@
 package th.ku.noter.source;
 
-public class Collection {
+import java.sql.PreparedStatement;
+
+public class Collection implements Queriable {
 
     private String id;
     private String name;
@@ -18,4 +20,8 @@ public class Collection {
         return name;
     }
 
+    @Override
+    public void update(PreparedStatement prep) {
+
+    }
 }

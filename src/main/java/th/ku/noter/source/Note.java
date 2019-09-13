@@ -1,6 +1,8 @@
 package th.ku.noter.source;
 
-public class Note {
+import java.sql.PreparedStatement;
+
+public class Note implements Queriable {
 
     private String id;
     private String content;
@@ -16,5 +18,10 @@ public class Note {
 
     public String getContent() {
         return content;
+    }
+
+    @Override
+    public void update(PreparedStatement prep) {
+
     }
 }

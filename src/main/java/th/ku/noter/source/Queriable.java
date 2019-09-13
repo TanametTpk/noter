@@ -2,7 +2,7 @@ package th.ku.noter.source;
 
 import java.sql.PreparedStatement;
 
-public interface Dao {
+public interface Queriable {
 
     public void update(PreparedStatement prep);
 

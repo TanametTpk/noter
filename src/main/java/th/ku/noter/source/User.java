@@ -1,6 +1,8 @@
 package th.ku.noter.source;
 
-public class User {
+import java.sql.PreparedStatement;
+
+public class User implements Queriable {
 
     private String id;
     private String name;
@@ -24,4 +26,8 @@ public class User {
         return email;
     }
 
+    @Override
+    public void update(PreparedStatement prep) {
+
+    }
 }

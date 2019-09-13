@@ -4,10 +4,16 @@ import th.ku.noter.source.DatabaseSource;
 import th.ku.noter.databases.SqliteConnector;
 import th.ku.noter.source.User;
 
-public class UserDao extends DatabaseSource {
+import java.sql.PreparedStatement;
+
+public class UserDao extends DatabaseSource{
 
     public UserDao() {
         super(SqliteConnector.getInstance() , "User");
+    }
+
+    public void create(User user){
+
     }
 
     public User get(String email){
@@ -16,16 +22,12 @@ public class UserDao extends DatabaseSource {
 
     }
 
-    public void update(){
+    public void update(User user){
 
     }
 
     public void delete(){
 
-    }
-
-    public boolean validate(String password){
-        return false;
     }
 
 }
