@@ -8,15 +8,15 @@ public class NoteDao extends DatabaseSource {
         super( SqliteConnector.getInstance() , "Note");
     }
 
-    public Note[] getAll(String userID){
+    public Note[] getAll(String userID , String collection){
         return null;
     }
 
-    public Note[] getAllSortByDate(String userID){
+    public Note[] getAllSortByDate(String userID , String collection){
         return null;
     }
 
-    public Note[] getAllStar(String userID){
+    public Note[] getAllStar(String userID , String collection){
         return null;
     }
 
