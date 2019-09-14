@@ -6,6 +6,7 @@ import th.ku.noter.source.DatabaseSource;
 import th.ku.noter.source.Note;
 import th.ku.noter.source.Queriable;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,12 +21,15 @@ public class NoteDao extends DatabaseSource {
         super( SqliteConnector.getInstance() , "Note");
     }
 
-    public Note create(Note note){
+    public Note create(Note note) throws SQLException {
 
         List<Queriable> dummy = new ArrayList<>();
-        long date = new Date().getTime();
         dummy.add(note);
-        this.getSqlite().update("insert into Note(content,created_at) values (?,"+ date +");" , dummy , UpdateType.INSERT);
+        PreparedStatement prep = this.getSqlite().update("insert into Note(content,created_at) values (?,?);" , dummy , UpdateType.INSERT);
+        ResultSet rs = prep.getGeneratedKeys();
+        if( rs.next()){
+            note.setId(rs.getString(1));
+        }
         return note;
 
     }
@@ -35,7 +39,7 @@ public class NoteDao extends DatabaseSource {
         Note note = null;
         if (rs.next()){
 
-            note = new Note(rs.getString(0), rs.getString(1) , rs.getLong(2) , rs.getInt(3)==1 , rs.getInt(4)==1);
+            note = new Note(rs.getString(1), rs.getString(2) , rs.getLong(3) , rs.getInt(4)==1 , rs.getInt(5)==1);
 
         }
 
@@ -47,7 +51,7 @@ public class NoteDao extends DatabaseSource {
         ArrayList<Note> notes = new ArrayList();
         while (rs.next()){
 
-            notes.add(new Note(rs.getString(0), rs.getString(1) , rs.getLong(2) , rs.getInt(3)==1 , rs.getInt(4)==1));
+            notes.add(new Note(rs.getString(1), rs.getString(2) , rs.getLong(3) , rs.getInt(4)==1 , rs.getInt(5)==1));
 
         }
 
@@ -59,7 +63,7 @@ public class NoteDao extends DatabaseSource {
         ArrayList<Note> notes = new ArrayList();
         while (rs.next()){
 
-            notes.add(new Note(rs.getString(0), rs.getString(1) , rs.getLong(2) , rs.getInt(3)==1 , rs.getInt(4)==1));
+            notes.add(new Note(rs.getString(1), rs.getString(2) , rs.getLong(3) , rs.getInt(4)==1 , rs.getInt(5)==1));
 
         }
 

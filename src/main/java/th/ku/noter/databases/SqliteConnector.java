@@ -53,7 +53,7 @@ public class SqliteConnector {
 
     }
 
-    public void update(String query , List<Queriable> dummies , UpdateType type){
+    public PreparedStatement update(String query , List<Queriable> dummies , UpdateType type){
 
         try(PreparedStatement prep = c.prepareStatement(query) ){
 
@@ -69,12 +69,16 @@ public class SqliteConnector {
             c.setAutoCommit(false);
             prep.executeBatch();
             c.setAutoCommit(true);
+            return prep;
 
         } catch (SQLException e) {
 
             e.printStackTrace();
 
         }
+
+        return null;
+
     }
 
 }

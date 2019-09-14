@@ -1,6 +1,7 @@
 package th.ku.noter.source;
 
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class User implements Queriable {
 
@@ -32,18 +33,27 @@ public class User implements Queriable {
         return providerId;
     }
 
-    @Override
-    public void insert(PreparedStatement prep) {
-
+    public void setId(String id){
+        this.id = id;
     }
 
     @Override
-    public void update(PreparedStatement prep) {
-
+    public void insert(PreparedStatement prep) throws SQLException {
+        prep.setString(1 , this.getName());
+        prep.setString(2 , this.getEmail());
+        prep.setString(3 , this.getProviderId());
     }
 
     @Override
-    public void delete(PreparedStatement prep) {
+    public void update(PreparedStatement prep) throws SQLException {
+        prep.setString(1 , this.getName());
+        prep.setString(2 , this.getEmail());
+        prep.setString(3 , this.getProviderId());
+        prep.setString(4 , this.getId());
+    }
 
+    @Override
+    public void delete(PreparedStatement prep) throws SQLException {
+        prep.setString(1 , this.getId());
     }
 }
