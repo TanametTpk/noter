@@ -1,6 +1,6 @@
 package th.ku.noter.databases;
 
-import th.ku.noter.source.Dao;
+import th.ku.noter.source.Queriable;
 
 import java.sql.*;
 import java.util.List;
@@ -53,12 +53,16 @@ public class SqliteConnector {
 
     }
 
-    public void update(String query , List<Dao> dummies){
+    public void update(String query , List<Queriable> dummies , UpdateType type){
 
         try(PreparedStatement prep = c.prepareStatement(query) ){
 
-            for (Dao dummy : dummies) {
-                dummy.update(prep);
+            for (Queriable dummy : dummies) {
+
+                if (type == UpdateType.INSERT) dummy.insert(prep);
+                else if (type == UpdateType.UPDATE) dummy.update(prep);
+                else dummy.delete(prep);
+
                 prep.addBatch();
             }
 
