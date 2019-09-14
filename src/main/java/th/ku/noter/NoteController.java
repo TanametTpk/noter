@@ -12,10 +12,11 @@ import java.util.List;
 @RestController
 public class NoteController {
 
+    private NoteDao note = NoteDao.instance;
+
     @RequestMapping("/notes/{userId}/{collectionId}")
     public List<Note> getAllNote(@PathVariable("userId") String userId , @PathVariable("collectionId") String collectionId , @RequestParam("sort") String sort){
 
-        NoteDao note = NoteDao.instance;
         List<Note> notes = null;
 
         if (sort.equals("Star"))

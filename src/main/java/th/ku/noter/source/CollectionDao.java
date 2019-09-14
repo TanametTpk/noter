@@ -4,7 +4,9 @@ import th.ku.noter.databases.SqliteConnector;
 
 public class CollectionDao extends DatabaseSource {
 
-    public CollectionDao() {
+    public static final CollectionDao instance = new CollectionDao();
+
+    private CollectionDao() {
         super(SqliteConnector.getInstance(), "Collection");
     }
 
