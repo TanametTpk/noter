@@ -2,21 +2,25 @@ package th.ku.noter.source;
 
 import th.ku.noter.databases.SqliteConnector;
 
+import java.util.List;
+
 public class NoteDao extends DatabaseSource {
 
-    public NoteDao() {
+    public static final NoteDao instance = new NoteDao();
+
+    private NoteDao() {
         super( SqliteConnector.getInstance() , "Note");
     }
 
-    public Note[] getAll(String userID , String collection){
+    public List<Note> getAll(String userID , String collection){
         return null;
     }
 
-    public Note[] getAllSortByDate(String userID , String collection){
+    public List<Note> getAllSortByDate(String userID , String collection){
         return null;
     }
 
-    public Note[] getAllStar(String userID , String collection){
+    public List<Note> getAllStar(String userID , String collection){
         return null;
     }
 

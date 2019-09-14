@@ -8,7 +8,9 @@ import java.sql.PreparedStatement;
 
 public class UserDao extends DatabaseSource{
 
-    public UserDao() {
+    public static final UserDao instance = new UserDao();
+
+    private UserDao() {
         super(SqliteConnector.getInstance() , "User");
     }
 
