@@ -36,7 +36,7 @@ public class CollectionDao extends DatabaseSource {
 
         List<Queriable> dummy = new ArrayList<>();
         dummy.add(collection);
-        this.getSqlite().update("insert into Collection(name) values (?);" , dummy , UpdateType.INSERT);
+        this.getSqlite().update("insert into Collection(name, u_id) values (?,?);" , dummy , UpdateType.INSERT);
 
     }
 
