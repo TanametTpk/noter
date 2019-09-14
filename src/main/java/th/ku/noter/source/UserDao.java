@@ -18,7 +18,13 @@ public class UserDao extends DatabaseSource{
 
     }
 
-    public User get(String email){
+    public User getById(String id){
+
+        return null;
+
+    }
+
+    public User getByEmail(String email){
 
         return null;
 

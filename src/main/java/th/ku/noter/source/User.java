@@ -7,11 +7,13 @@ public class User implements Queriable {
     private String id;
     private String name;
     private String email;
+    private String providerId;
 
-    public User(String id, String name, String email) {
+    public User(String id, String name, String email , String providerId) {
         this.id = id;
         this.name = name;
         this.email = email;
+        this.providerId = providerId;
     }
 
     public String getId() {
@@ -24,6 +26,10 @@ public class User implements Queriable {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getProviderId() {
+        return providerId;
     }
 
     @Override
