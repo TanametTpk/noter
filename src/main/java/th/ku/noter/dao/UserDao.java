@@ -41,7 +41,7 @@ public class UserDao extends DatabaseSource{
 
     public User getByEmail(String email) throws SQLException {
 
-        ResultSet rs =  this.getSqlite().execute("SELECT * FROM User WHERE email=" + email);
+        ResultSet rs =  this.getSqlite().execute("SELECT * FROM User WHERE email=\"" + email + "\"");
         User user = null;
         if (rs.next()){
 

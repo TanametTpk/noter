@@ -30,7 +30,7 @@ public class NoteDao extends DatabaseSource {
     }
 
     public List<Note> getAllSortByDate(String userID , String collection) throws SQLException {
-        ResultSet rs =  this.getSqlite().execute("SELECT n.id , n.content , n.created_at , u.star , u.pin FROM User_Note as u INNER JOIN Note as n ON n.id=u.n_id AND u.u_id=" + userID + " AND u.c_id=" + collection );
+        ResultSet rs =  this.getSqlite().execute("SELECT n.id , n.content , n.created_at , u.star , u.pin FROM User_Note as u INNER JOIN Note as n ON n.id=u.n_id AND u.u_id=" + userID + " AND u.c_id=" + collection + " ORDER BY created_at DESC;" );
         ArrayList<Note> notes = new ArrayList();
         while (rs.next()){
 
@@ -42,7 +42,7 @@ public class NoteDao extends DatabaseSource {
     }
 
     public List<Note> getAllStar(String userID , String collection) throws SQLException {
-        ResultSet rs =  this.getSqlite().execute("SELECT n.id , n.content , n.created_at , u.star , u.pin FROM User_Note as u INNER JOIN Note as n ON n.id=u.n_id AND u.u_id=" + userID + " AND u.c_id=" + collection + " ORDER BY create_at DESC;");
+        ResultSet rs =  this.getSqlite().execute("SELECT n.id , n.content , n.created_at , u.star , u.pin FROM User_Note as u INNER JOIN Note as n ON n.id=u.n_id AND u.star=1 AND u.u_id=" + userID + " AND u.c_id=" + collection + " ORDER BY created_at DESC;");
         ArrayList<Note> notes = new ArrayList();
         while (rs.next()){
 
@@ -51,6 +51,12 @@ public class NoteDao extends DatabaseSource {
         }
 
         return notes;
+    }
+
+    public void delete(Note note){
+        List<Queriable> dummy = new ArrayList<>();
+        dummy.add(note);
+        this.getSqlite().update("DELETE FROM Note WHERE id = ?" , dummy , UpdateType.DELETE);
     }
 
 }
