@@ -1,6 +1,7 @@
 package th.ku.noter.source;
 
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class UserNote implements Queriable {
 
@@ -59,17 +60,27 @@ public class UserNote implements Queriable {
     }
 
     @Override
-    public void insert(PreparedStatement prep) {
-
+    public void insert(PreparedStatement prep) throws SQLException {
+        prep.setString(1 , this.getU_id());
+        prep.setString(2 , this.getN_id());
+        prep.setString(3 , this.getC_id());
+        prep.setInt(4 , this.getStar());
+        prep.setInt(5 , this.getPin());
     }
 
     @Override
-    public void update(PreparedStatement prep) {
-
+    public void update(PreparedStatement prep) throws SQLException {
+        prep.setString(3 , this.getU_id());
+        prep.setString(4 , this.getN_id());
+        prep.setString(5 , this.getC_id());
+        prep.setInt(1 , this.getStar());
+        prep.setInt(2 , this.getPin());
     }
 
     @Override
-    public void delete(PreparedStatement prep) {
-
+    public void delete(PreparedStatement prep) throws SQLException {
+        prep.setString(1 , this.getU_id());
+        prep.setString(2 , this.getN_id());
+        prep.setString(3 , this.getC_id());
     }
 }

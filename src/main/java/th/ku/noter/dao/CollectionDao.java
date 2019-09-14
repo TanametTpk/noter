@@ -25,7 +25,7 @@ public class CollectionDao extends DatabaseSource {
         ArrayList<Collection> collection = new ArrayList();
         while (rs.next()){
 
-            collection.add(new Collection(rs.getString(0), rs.getString(1)));
+            collection.add(new Collection(rs.getString(1), rs.getString(2) , rs.getString(3)));
 
         }
 

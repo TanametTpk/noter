@@ -6,6 +6,7 @@ import th.ku.noter.databases.SqliteConnector;
 import th.ku.noter.source.Queriable;
 import th.ku.noter.source.User;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class UserDao extends DatabaseSource{
         super(SqliteConnector.getInstance() , "User");
     }
 
-    public void create(User user){
+    public void create(User user) throws SQLException {
         List<Queriable> dummy = new ArrayList<>();
         dummy.add(user);
         this.getSqlite().update("insert into User(name,email,provider_id) values (?,?,?);" , dummy , UpdateType.INSERT);
@@ -31,7 +32,7 @@ public class UserDao extends DatabaseSource{
         User user = null;
         if (rs.next()){
 
-            user = new User(rs.getString(0), rs.getString(1), rs.getString(2), rs.getString(3));
+            user = new User(rs.getString(1), rs.getString(2), rs.getString(2), rs.getString(4));
 
         }
 
@@ -45,7 +46,7 @@ public class UserDao extends DatabaseSource{
         User user = null;
         if (rs.next()){
 
-            user = new User(rs.getString(0), rs.getString(1), rs.getString(2), rs.getString(3));
+            user = new User(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
 
         }
 

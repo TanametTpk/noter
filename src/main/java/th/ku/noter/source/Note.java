@@ -1,6 +1,7 @@
 package th.ku.noter.source;
 
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class Note implements Queriable {
 
@@ -59,8 +60,9 @@ public class Note implements Queriable {
     }
 
     @Override
-    public void insert(PreparedStatement prep) {
-
+    public void insert(PreparedStatement prep) throws SQLException {
+        prep.setString(1 , this.getContent());
+        prep.setLong(2 , this.getCreated_at());
     }
 
     @Override
@@ -69,7 +71,7 @@ public class Note implements Queriable {
     }
 
     @Override
-    public void delete(PreparedStatement prep) {
-
+    public void delete(PreparedStatement prep) throws SQLException {
+        prep.setString(1 , this.getId());
     }
 }
