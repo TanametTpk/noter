@@ -1,9 +1,15 @@
 package th.ku.noter.dao;
 
 import th.ku.noter.databases.SqliteConnector;
+import th.ku.noter.databases.UpdateType;
 import th.ku.noter.source.DatabaseSource;
 import th.ku.noter.source.Note;
+import th.ku.noter.source.Queriable;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class NoteDao extends DatabaseSource {
@@ -16,20 +22,35 @@ public class NoteDao extends DatabaseSource {
 
     public void create(Note note){
 
-
+        List<Queriable> dummy = new ArrayList<>();
+        long date = new Date().getTime();
+        dummy.add(note);
+        this.getSqlite().update("insert into Note(content,created_at) values (?,"+ date +");" , dummy , UpdateType.INSERT);
 
     }
 
-    public List<Note> getAll(String userID , String collection){
-        return null;
+    public List<Note> getAllSortByDate(String userID , String collection) throws SQLException {
+        ResultSet rs =  this.getSqlite().execute("SELECT n.id , n.content , n.created_at , u.star , u.pin FROM User_Note as u INNER JOIN Note as n ON n.id=u.n_id AND u.u_id=" + userID + " AND u.c_id=" + collection );
+        ArrayList<Note> notes = new ArrayList();
+        while (rs.next()){
+
+            notes.add(new Note(rs.getString(0), rs.getString(1) , rs.getLong(2) , rs.getInt(3)==1 , rs.getInt(4)==1));
+
+        }
+
+        return notes;
     }
 
-    public List<Note> getAllSortByDate(String userID , String collection){
-        return null;
-    }
+    public List<Note> getAllStar(String userID , String collection) throws SQLException {
+        ResultSet rs =  this.getSqlite().execute("SELECT n.id , n.content , n.created_at , u.star , u.pin FROM User_Note as u INNER JOIN Note as n ON n.id=u.n_id AND u.u_id=" + userID + " AND u.c_id=" + collection + " ORDER BY create_at DESC;");
+        ArrayList<Note> notes = new ArrayList();
+        while (rs.next()){
 
-    public List<Note> getAllStar(String userID , String collection){
-        return null;
+            notes.add(new Note(rs.getString(0), rs.getString(1) , rs.getLong(2) , rs.getInt(3)==1 , rs.getInt(4)==1));
+
+        }
+
+        return notes;
     }
 
 }

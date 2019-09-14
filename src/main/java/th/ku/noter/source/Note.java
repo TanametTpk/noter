@@ -6,12 +6,14 @@ public class Note implements Queriable {
 
     private String id;
     private String content;
+    private long created_at;
     private boolean star;
     private boolean pin;
 
-    public Note(String id, String content, boolean star, boolean pin) {
+    public Note(String id, String content, long created_at, boolean star, boolean pin) {
         this.id = id;
         this.content = content;
+        this.created_at = created_at;
         this.star = star;
         this.pin = pin;
     }
@@ -30,6 +32,14 @@ public class Note implements Queriable {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public long getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(long created_at) {
+        this.created_at = created_at;
     }
 
     public boolean isStar() {
