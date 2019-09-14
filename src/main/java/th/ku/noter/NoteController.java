@@ -1,11 +1,8 @@
 package th.ku.noter;
 
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import th.ku.noter.source.Note;
-import th.ku.noter.source.NoteDao;
+import th.ku.noter.dao.NoteDao;
 
 import java.util.List;
 
@@ -25,6 +22,14 @@ public class NoteController {
             notes = note.getAllSortByDate(userId , collectionId);
 
         return notes;
+    }
+
+    @PostMapping("/notes")
+    public Note createNote(@RequestBody String content , @RequestBody String userId , @RequestBody String collectionId){
+        Note n = new Note("" , content , false , false);
+        note.create(n);
+        // create mapping obj
+        return n;
     }
 
 }

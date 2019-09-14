@@ -1,6 +1,8 @@
-package th.ku.noter.source;
+package th.ku.noter.dao;
 
 import th.ku.noter.databases.SqliteConnector;
+import th.ku.noter.source.Collection;
+import th.ku.noter.source.DatabaseSource;
 
 public class CollectionDao extends DatabaseSource {
 

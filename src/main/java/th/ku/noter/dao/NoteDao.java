@@ -1,6 +1,8 @@
-package th.ku.noter.source;
+package th.ku.noter.dao;
 
 import th.ku.noter.databases.SqliteConnector;
+import th.ku.noter.source.DatabaseSource;
+import th.ku.noter.source.Note;
 
 import java.util.List;
 
@@ -10,6 +12,12 @@ public class NoteDao extends DatabaseSource {
 
     private NoteDao() {
         super( SqliteConnector.getInstance() , "Note");
+    }
+
+    public void create(Note note){
+
+
+
     }
 
     public List<Note> getAll(String userID , String collection){

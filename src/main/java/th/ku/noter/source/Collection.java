@@ -21,7 +21,17 @@ public class Collection implements Queriable {
     }
 
     @Override
+    public void insert(PreparedStatement prep) {
+
+    }
+
+    @Override
     public void update(PreparedStatement prep) {
+
+    }
+
+    @Override
+    public void delete(PreparedStatement prep) {
 
     }
 }

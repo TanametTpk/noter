@@ -1,10 +1,9 @@
 package th.ku.noter;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import th.ku.noter.source.User;
-import th.ku.noter.source.UserDao;
+import th.ku.noter.dao.UserDao;
 
 @RestController
 public class UserController {
