@@ -6,6 +6,7 @@ import th.ku.noter.source.Collection;
 import th.ku.noter.source.DatabaseSource;
 import th.ku.noter.source.Queriable;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -32,11 +33,16 @@ public class CollectionDao extends DatabaseSource {
         return collection;
     }
 
-    public void create(Collection collection){
+    public Collection create(Collection collection) throws SQLException {
 
         List<Queriable> dummy = new ArrayList<>();
         dummy.add(collection);
-        this.getSqlite().update("insert into Collection(name, u_id) values (?,?);" , dummy , UpdateType.INSERT);
+        PreparedStatement prep = this.getSqlite().update("insert into Collection(name, u_id) values (?,?);" , dummy , UpdateType.INSERT);
+        ResultSet rs = prep.getGeneratedKeys();
+        if( rs.next()){
+            collection.setId(rs.getString(1));
+        }
+        return collection;
 
     }
 

@@ -8,10 +8,12 @@ VOLUME /tmp
 EXPOSE 8080
 
 # Set application's JAR file
-ARG JAR_FILE=target/hello-docker-0.0.1-SNAPSHOT.jar
+ARG JAR_FILE=target/noter-0.0.1-SNAPSHOT.jar
 
 # Add the application's JAR file to the container
 ADD ${JAR_FILE} app.jar
+
+ADD noter.db noter.db 
 
 # Run the JAR file
 ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/app.jar"]
