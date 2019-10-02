@@ -7,6 +7,7 @@ import th.ku.noter.dao.UserDao;
 
 import java.sql.SQLException;
 
+@CrossOrigin(maxAge = 3600)
 @RestController
 public class UserController {
 
@@ -15,10 +16,14 @@ public class UserController {
     @PostMapping("/users")
     public User createUser( @RequestBody User userReq) throws SQLException {
         User u = new User("" , userReq.getName() , userReq.getEmail() , userReq.getProviderId());
-        user.create(u);
+        // user.create(u);
         User uRes = user.getByEmail(userReq.getEmail());
 
-        if (uRes.getProviderId().equals(userReq.getProviderId())){
+        if (uRes != null && uRes.getProviderId().equals(userReq.getProviderId())){
+            return uRes;
+        }else if(uRes == null){
+            user.create(u);
+            uRes = user.getByEmail(u.getEmail());
             return uRes;
         }
 

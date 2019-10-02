@@ -7,6 +7,7 @@ import th.ku.noter.dao.CollectionDao;
 import java.sql.SQLException;
 import java.util.List;
 
+@CrossOrigin(maxAge = 3600)
 @RestController
 public class CollectionController {
 
@@ -18,7 +19,7 @@ public class CollectionController {
     }
 
     @PostMapping("/collections")
-    public Collection createCollection(@RequestBody Collection collectionReq){
+    public Collection createCollection(@RequestBody Collection collectionReq)  throws SQLException {
 
         collection.create(collectionReq);
         return collectionReq;
